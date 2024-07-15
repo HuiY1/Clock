@@ -53,6 +53,15 @@ function invertColors() {
 
     body.style.backgroundColor = invertColor(rgbToHex(bodyBg));
     div.style.color = invertColor(rgbToHex(divCl));
+
+    const clock = document.getElementById('clock');
+    if (clock.style.filter === 'invert(0)') {
+        clock.style.filter = 'invert(1)';
+    }
+    else {
+        clock.style.filter = 'invert(0)';
+    }
+
 }
 
 function rgbToHex(rgb) {
@@ -61,3 +70,102 @@ function rgbToHex(rgb) {
     });
     return `#${result.join('')}`;
 }
+
+
+
+
+let currentHour = 0;
+let currentMinute = 0;
+let currentSecond = 0;
+let timer;
+let isDragging = false;
+let dragging = null;
+
+function updateClock() {
+    currentSecond++;
+    if (currentSecond >= 60) {
+        currentSecond = 0;
+        currentMinute++;
+        if (currentMinute >= 60) {
+            currentMinute = 0;
+            currentHour = (currentHour + 1) % 12;
+        }
+    }
+    setClockHands();
+}
+
+function setClockHands() {
+    const secondAngle = currentSecond * 6;
+    const minuteAngle = currentMinute * 6 + currentSecond * 0.1;
+    const hourAngle = (currentHour % 12) * 30 + currentMinute * 0.5;
+
+    document.getElementById('secondHand').setAttribute('transform', `rotate(${secondAngle}, 200, 200)`);
+    document.getElementById('minuteHand').setAttribute('transform', `rotate(${minuteAngle}, 200, 200)`);
+    document.getElementById('hourHand').setAttribute('transform', `rotate(${hourAngle}, 200, 200)`);
+
+    document.getElementById('digital').innerText = `${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}:${currentSecond.toString().padStart(2, '0')}`;
+}
+
+function setClockTime() {
+    const hourInput = parseInt(document.getElementById('hourInput').value);
+    const minuteInput = parseInt(document.getElementById('minuteInput').value);
+    const secondInput = parseInt(document.getElementById('secondInput').value);
+
+    if (!isNaN(hourInput) && !isNaN(minuteInput) && !isNaN(secondInput)) {
+        currentHour = hourInput % 12;
+        currentMinute = minuteInput % 60;
+        currentSecond = secondInput % 60;
+        setClockHands();
+    }
+}
+
+function setHand(hand, angle) {
+    hand.setAttribute('transform', `rotate(${angle}, 200, 200)`);
+}
+
+function getAngleFromEvent(event) {
+    const rect = event.target.getBoundingClientRect();
+    const x = event.clientX - rect.left - 200;
+    const y = event.clientY - rect.top - 200;
+    const angle = Math.atan2(y, x) * (180 / Math.PI) + 90;
+    return (angle < 0 ? angle + 360 : angle);
+}
+
+function updateTimeFromAngle(hand, angle) {
+    if (hand.id === 'secondHand') {
+        currentSecond = Math.round(angle / 6);
+    } else if (hand.id === 'minuteHand') {
+        currentMinute = Math.round(angle / 6);
+    } else if (hand.id === 'hourHand') {
+        currentHour = Math.round(angle / 30) % 12;
+    }
+    setClockHands();
+}
+
+document.querySelectorAll('#hourHand, #minuteHand, #secondHand').forEach(hand => {
+    hand.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        clearInterval(timer);
+        dragging = e.target;
+    });
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (dragging) {
+        const angle = getAngleFromEvent(e);
+        setHand(dragging, angle);
+        updateTimeFromAngle(dragging, angle);
+    }
+});
+
+document.addEventListener('mouseup', () => {
+    if (isDragging) {
+        isDragging = false;
+        dragging = null;
+        timer = setInterval(updateClock, 1000);
+    }
+});
+
+// Initial call to set the correct time immediately
+updateClock();
+timer = setInterval(updateClock, 1000);
