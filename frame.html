@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a href="">
+                <p class="p1">Clock</p>
+                <p class="p2">时钟网</p>
+            </a>
+            <button onclick="invertColors()">
+                <svg class="svg-container" viewBox="0 0 200 200">
+                    <!-- 画圆 -->
+                    <circle cx="100" cy="100" r="50" stroke="black" stroke-width="3" fill="white" />
+                    <!-- 画半圆 -->
+                    <path d="M 50 100 A 50 50 0 0 1 150 100" fill="gray" stroke="black" stroke-width="3" />
+                </svg>
+            </button>
+        </div>
+        <ul class="pagination">
+            <li class="page-item first" id="pi_1"><a href="#section1">时间</a></li>
+            <li class="page-item" id="pi_2"><a href="#section2">闹钟</a></li>
+            <li class="page-item" id="pi_3"><a href="#section3">计时器</a></li>
+            <li class="page-item" id="pi_4"><a href="#section4">秒表</a></li>
+        </ul>
+
+        <div class="content-container">
+            <div id="section1" class="content">
+                <h2>功能块1</h2>
+                <p>这是功能块1的内容。</p>
+            </div>
+
+            <div id="section2" class="content">
+                <h2>功能块2</h2>
+                <p>这是功能块2的内容。</p>
+            </div>
+
+            <div id="section3" class="content">
+                <h2>功能块3</h2>
+                <p>这是功能块3的内容。</p>
+            </div>
+
+            <div id="section4" class="content">
+                <h2>功能块4</h2>
+                <p>这是功能块4的内容。</p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
