@@ -32,5 +32,32 @@ document.addEventListener("DOMContentLoaded", function () {
             this.style.backgroundColor = '#7c7c7c'; // 设置被点击的 .page-item 的背景颜色
         };
     });
-
 });
+
+function invertColor(hex) {
+    if (hex.charAt(0) === '#') {
+        hex = hex.slice(1);
+    }
+    let r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16).padStart(2, '0');
+    let g = (255 - parseInt(hex.slice(2, 4), 16)).toString(16).padStart(2, '0');
+    let b = (255 - parseInt(hex.slice(4, 6), 16)).toString(16).padStart(2, '0');
+    return `#${r}${g}${b}`;
+}
+
+function invertColors() {
+    let body = document.body;
+    let div = document.querySelector('.content-container');
+
+    let bodyBg = window.getComputedStyle(body).backgroundColor;
+    let divCl = window.getComputedStyle(div).color;
+
+    body.style.backgroundColor = invertColor(rgbToHex(bodyBg));
+    div.style.color = invertColor(rgbToHex(divCl));
+}
+
+function rgbToHex(rgb) {
+    let result = rgb.match(/\d+/g).map(function (x) {
+        return parseInt(x).toString(16).padStart(2, '0');
+    });
+    return `#${result.join('')}`;
+}
