@@ -83,13 +83,40 @@
             </div>
 
             <div id="section3" class="content">
-                <h2>功能块3</h2>
-                <p>这是功能块3的内容。</p>
+                <audio id="audioAlert">
+                    <source src="mixkit-alert-quick-chime-766.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <div id="timer">
+                    <div id="timerDisplay">00:00:00</div>
+                    <label>
+                        Hour:
+                        <input type="number" id="timerHourInput" min="0" max="23">
+                    </label>
+                    <label>
+                        Minute:
+                        <input type="number" id="timerMinuteInput" min="0" max="59">
+                    </label>
+                    <label>
+                        Second:
+                        <input type="number" id="timerSecondInput" min="0" max="59">
+                    </label>
+                    <button onclick="startTimer()">Start</button>
+                    <button onclick="stopTimer()">Stop</button>
+                    <button onclick="resetTimer()">Reset</button>
+                </div>
             </div>
 
             <div id="section4" class="content">
-                <h2>功能块4</h2>
-                <p>这是功能块4的内容。</p>
+
+                <div id="stopwatch">
+                    <div id="stopwatchDisplay">00:00:00.00</div>
+                    <button onclick="startStopwatch()">Start</button>
+                    <button onclick="stopStopwatch()">Stop</button>
+                    <button onclick="resetStopwatch()">Reset</button>
+                    <button onclick="recordLap()">Lap</button>
+                    <ul id="laps"></ul>
+                </div>
             </div>
         </div>
     </div>
