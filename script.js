@@ -268,3 +268,67 @@ function padZero(num, size) {
     while (s.length < size) s = "0" + s;
     return s;
 }
+
+var realtime=document.getElementById("realtime");
+var datetime = new Date();
+var hour = datetime.getHours();
+var minute = datetime.getMinutes();
+var second = datetime.getSeconds();
+let clockInterval;
+let clockTime = 0;
+clockInterval = setInterval(() => {
+    clockTime+=1000;
+    document.getElementById('realtime').textContent = formatTime2(clockTime);
+}, 1000);
+function formatTime2(milliseconds) {
+    let seconds = Math.floor((milliseconds % (1000 * 60)) / 1000)+parseInt(second);
+    let jin1=0;let jin2=0;
+    if(seconds>59){
+        seconds-=60;
+        jin1=1;
+    }
+    let minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60))+parseInt(minute)+jin1;
+    if(minutes>59){
+        minutes-=60;
+        jin2=1;
+    }
+    let hours = Math.floor(milliseconds / (1000 * 60 * 60))+parseInt(hour)+jin2;
+    if(hours>23){
+        hours-=24;
+    }
+    
+    if(clockon==1)
+    {
+        if(hours==arr_h&&minutes==arr_m&&seconds==arr_s)
+        {
+            alert("The alarm clock is ringing.");
+        }
+    }
+    return `${padZero(hours, 2)}:${padZero(minutes, 2)}:${padZero(seconds, 2)}`;
+}
+let clockon=0;
+let arr_h = 0 ;
+let arr_m = 0 ;
+let arr_s = 0 ;
+var num = 0;
+var flag = 0;
+function setclock()
+{
+    if(clockon==0)
+    {
+        arr_h = parseInt(document.getElementById('clockHourInput').value);
+        arr_m = parseInt(document.getElementById('clockMinuteInput').value);
+        arr_s = parseInt(document.getElementById('clockSecondInput').value);
+        var s = "Alarm Clock: " + `${padZero(arr_h, 2)}:${padZero(arr_m, 2)}:${padZero(arr_s, 2)}`;
+        document.getElementById('clockonon').textContent= s;
+    }
+    clockon=1;
+}
+function clearclock()
+{
+    if(clockon==1)
+    {
+        document.getElementById('clockonon').textContent = "";
+    }
+    clockon=0;
+}
