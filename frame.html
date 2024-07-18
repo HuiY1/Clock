@@ -32,52 +32,11 @@
         </ul>
 
         <div class="content-container">
-            <div id="section1" class="content"><!------------------------------------>
-
-                <svg id="clock" viewBox="0 0 400 400">
-                    <!-- Clock face -->
-                    <circle cx="200" cy="200" r="190" stroke="black" stroke-width="5" fill="none" />
-
-                    <!-- Hour marks -->
-                    <g id="hourMarks">
-                        <line x1="200" y1="30" x2="200" y2="50" stroke="black" stroke-width="4" />
-                        <line x1="200" y1="350" x2="200" y2="370" stroke="black" stroke-width="4" />
-                        <line x1="350" y1="200" x2="370" y2="200" stroke="black" stroke-width="4" />
-                        <line x1="30" y1="200" x2="50" y2="200" stroke="black" stroke-width="4" />
-                    </g>
-
-                    <!-- Hands of the clock -->
-                    <line id="hourHand" x1="200" y1="200" x2="200" y2="100" stroke="black" stroke-width="6"
-                        stroke-linecap="round" />
-                    <line id="minuteHand" x1="200" y1="200" x2="200" y2="70" stroke="black" stroke-width="4"
-                        stroke-linecap="round" />
-                    <line id="secondHand" x1="200" y1="200" x2="200" y2="50" stroke="red" stroke-width="2"
-                        stroke-linecap="round" />
-
-                    <!-- Clock center -->
-                    <circle cx="200" cy="200" r="5" fill="black" />
-                </svg>
-                <div id="digital"></div>
-
-                <div id="controls">
-                    <label>
-                        Hour:
-                        <input type="number" id="hourInput" min="0" max="11">
-                    </label>
-                    <label>
-                        Minute:
-                        <input type="number" id="minuteInput" min="0" max="59">
-                    </label>
-                    <label>
-                        Second:
-                        <input type="number" id="secondInput" min="0" max="59">
-                    </label>
-                    <button onclick="setClockTime()">Set Time</button>
-                </div>
-
+            <div id="section1" class="content">
+                <p>Todo: Put in your content</p>
             </div>
 
-             <div id="section2" class="content">
+            <div id="section2" class="content">
                 <div id="clocktime">
                     <div id="realtime"></div>
                     <label>
@@ -92,8 +51,8 @@
                         Second:
                         <input type="number" id="clockSecondInput" min="0" max="59">
                     </label>
-                    <button onclick="setclock()">set</button>
-                    <button onclick="clearclock()">clear</button>
+                    <button onclick="setclock()">Set</button>
+                    <button onclick="resetclock()">Reset</button>
                     <div id="clockonon"></div>
                 </div>
             </div>
