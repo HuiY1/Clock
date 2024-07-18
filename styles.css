@@ -290,3 +290,66 @@ body {
     border-radius: 4px; /* 圆角 */
 
 }
+
+#clocktime {
+    text-align: center;
+    position:absolute;
+    top:35%;
+
+}
+#realtime {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+
+#clocktime {
+    left:35%;
+    border: 1px  #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+
+}
+#realtime {
+    font-size: 48px;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+
+}
+#clockonon {
+    font-size: 48px;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+
+}
+#clocktime button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+#clocktime button:hover {
+    background-color: #45a049;
+}
+
+#clocktime input[type="number"] {
+    width: 60px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
