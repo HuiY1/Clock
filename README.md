@@ -7,7 +7,9 @@
 
 Html5，CSS3，JavaScript，Chorme 126.0.6478.127，Visual Studio Code
 
+#### github网站链接
 
+https://huiy1.github.io/Clock/index.html
 
 #### 实验分工
 
@@ -53,7 +55,7 @@ Html5，CSS3，JavaScript，Chorme 126.0.6478.127，Visual Studio Code
 
 #### 使用说明
 
-Clock.main 文件夹中含有 frame.html，script.js，styles.css，mixkit-alert-quick-chime-766.wav。用浏览器打开 frame.html 即可。
+Clock.main 文件夹中含有 index.html，script.js，styles.css，mixkit-alert-quick-chime-766.wav。用浏览器打开 index.html 即可。
 
 
 
