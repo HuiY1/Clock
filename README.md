@@ -54,6 +54,7 @@ HTML中的输入框和按钮用于用户输入时间和控制定时器。
 HTML中的显示器和按钮用于控制秒表和显示时间。
 在JavaScript中，startStopwatch()函数启动秒表；stopStopwatch()函数停止秒表；resetStopwatch()函数重置秒表和圈数；recordLap()函数记录当前时间并显示在圈数列表中。
 
+
 #### 使用说明
 
 Clock.main 文件夹中含有 index.html，script.js，styles.css，mixkit-alert-quick-chime-766.wav。用浏览器打开 index.html 即可。
