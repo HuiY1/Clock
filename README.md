@@ -31,7 +31,8 @@ https://huiy1.github.io/Clock/index.html
 
 对于页面内容框中的第 n 个模块，设 id="section_n"，class="content" 。添加 DOMContentLoaded 事件监听器，获取所有 .page-item a 元素（即侧边导航栏中的分页链接）记为 links变量。获取所有 .content 元素（即页面内容框中的四个模块）记为 contents。
 为 links 中每个元素都添加点击事件监听器，点击后首先将所有 .content 元素移除 active，此时隐藏了所有的模块。随后根据当前被点击的链接链接到的 id，为目标内容添加 active，使其显示。
-特别的， 在DOMContentLoaded 事件中，额外使用 if (links.length > 0) 判断是否存在分页链接，如果第一个分页链接存在，调用 links[0].click() 模拟点击第一个链接，触发其点击事件监听器，就做到了页面加载完毕时默认显示了模块1（时钟模块）。
+
+特别的，在DOMContentLoaded 事件中，额外使用 if (links.length > 0) 判断是否存在分页链接，如果第一个分页链接存在，调用 links[0].click() 模拟点击第一个链接，触发其点击事件监听器，就做到了页面加载完毕时默认显示了模块1（时钟模块）。
 
 
 
