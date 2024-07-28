@@ -173,7 +173,11 @@ body {
 
 #controls {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px;
+}
+
+#controls label {
+    font-size: 16px;
 }
 
 #controls input {
@@ -181,10 +185,15 @@ body {
     text-align: center;
 }
 
+#controls button {
+    border: none;
+    border-radius: 4px;
+}
+
 #digital {
     text-align: center;
-    font-size: 24px;
-    margin-top: 10px;
+    font-size: 58px;
+    margin-top: 20px;
 }
 
 

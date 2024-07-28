@@ -35,51 +35,155 @@
             <div id="section1" class="content">
                 <svg id="clock" viewBox="0 0 400 400">
                     <!-- Clock face -->
-                    <circle cx="200" cy="200" r="190" stroke="black" stroke-width="5" fill="none" />
+                    <circle cx="200" cy="200" r="195" stroke="black" stroke-width="5" fill="none" />
 
                     <!-- Hour marks and numbers -->
                     <g id="hourMarks">
                         <!-- Major hour marks and numbers -->
                         <g>
                             <line x1="200" y1="35" x2="200" y2="55" stroke="black" stroke-width="4" />
-                            <text x="200" y="30" font-size="20" text-anchor="middle">12</text>
+                            <text x="200" y="30" font-size="22" text-anchor="middle">XII</text>
 
                             <line x1="200" y1="370" x2="200" y2="350" stroke="black" stroke-width="4" />
-                            <text x="200" y="385" font-size="20" text-anchor="middle">6</text>
+                            <text x="200" y="385" font-size="22" text-anchor="middle">VI</text>
 
                             <line x1="375" y1="202" x2="355" y2="202" stroke="black" stroke-width="4" />
-                            <text x="380" y="208" font-size="20" text-anchor="middle">3</text>
+                            <text x="380" y="208" font-size="22" text-anchor="middle">III</text>
 
                             <line x1="25" y1="200" x2="45" y2="200" stroke="black" stroke-width="4" />
-                            <text x="20" y="208" font-size="20" text-anchor="middle">9</text>
+                            <text x="20" y="208" font-size="22" text-anchor="middle">IX</text>
 
                             <!-- Remaining hour marks and numbers -->
                             <line x1="287.28" y1="52.72" x2="280" y2="65" stroke="black" stroke-width="2" />
-                            <text x="287" y="52" font-size="20" text-anchor="middle">1</text>
+                            <text x="287" y="52" font-size="22" text-anchor="middle">I</text>
 
                             <line x1="351.28" y1="113.72" x2="337" y2="123" stroke="black" stroke-width="2" />
-                            <text x="356" y="118" font-size="20" text-anchor="middle">2</text>
+                            <text x="356" y="118" font-size="22" text-anchor="middle">II</text>
 
                             <line x1="284.28" y1="347.28" x2="276" y2="333" stroke="black" stroke-width="2" />
-                            <text x="285" y="363" font-size="20" text-anchor="middle">5</text>
+                            <text x="285" y="363" font-size="22" text-anchor="middle">V</text>
 
                             <line x1="347.28" y1="286.28" x2="332" y2="276" stroke="black" stroke-width="2" />
-                            <text x="355" y="293" font-size="20" text-anchor="middle">4</text>
+                            <text x="355" y="293" font-size="22" text-anchor="middle">IV</text>
 
                             <line x1="116.72" y1="52.72" x2="125" y2="68" stroke="black" stroke-width="2" />
-                            <text x="116" y="50" font-size="20" text-anchor="middle">11</text>
+                            <text x="116" y="50" font-size="22" text-anchor="middle">XI</text>
 
                             <line x1="57.72" y1="116.72" x2="70" y2="125" stroke="black" stroke-width="2" />
-                            <text x="47" y="123" font-size="20" text-anchor="middle">10</text>
+                            <text x="47" y="123" font-size="22" text-anchor="middle">X</text>
 
                             <line x1="116.72" y1="347.28" x2="125" y2="332" stroke="black" stroke-width="2" />
-                            <text x="116" y="364" font-size="20" text-anchor="middle">7</text>
+                            <text x="116" y="364" font-size="22" text-anchor="middle">VII</text>
 
                             <line x1="52.72" y1="285.28" x2="69" y2="275" stroke="black" stroke-width="2" />
-                            <text x="46" y="295" font-size="20" text-anchor="middle">8</text>
+                            <text x="46" y="295" font-size="22" text-anchor="middle">VIII</text>
                         </g>
 
+
+                        <!-- Minor minute marks -->
+                        <g>
+                            <!-- Generate minor marks -->
+                            <!-- The major marks already cover every 30 degrees, so we need to generate marks for every 6 degrees except those already marked -->
+                            <!-- We can achieve this by looping over 360 degrees and skipping the multiples of 30 degrees -->
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(6 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(12 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(18 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(24 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(36 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(42 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(48 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(54 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(66 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(72 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(78 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(84 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(96 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(102 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(108 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(114 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(126 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(132 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(138 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(144 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(156 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(162 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(168 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(174 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(186 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(192 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(198 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(204 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(216 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(222 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(228 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(234 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(246 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(252 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(258 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(264 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(276 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(282 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(288 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(294 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(306 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(312 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(318 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(324 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(336 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(342 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(348 200 200)" />
+                            <line x1="200" y1="35" x2="200" y2="45" stroke="black" stroke-width="1"
+                                transform="rotate(354 200 200)" />
+                        </g>
                     </g>
+
 
                     <!-- Hands of the clock -->
                     <line id="hourHand" x1="200" y1="200" x2="200" y2="100" stroke="black" stroke-width="6"
