@@ -107,16 +107,32 @@ function setClockHands() {
 }
 
 function setClockTime() {
+    // 获取输入值并转换为整数
     const hourInput = parseInt(document.getElementById('hourInput').value);
     const minuteInput = parseInt(document.getElementById('minuteInput').value);
     const secondInput = parseInt(document.getElementById('secondInput').value);
 
-    if (!isNaN(hourInput) && !isNaN(minuteInput) && !isNaN(secondInput)) {
-        currentHour = hourInput % 12;
-        currentMinute = minuteInput % 60;
-        currentSecond = secondInput % 60;
-        setClockHands();
+    // 检查输入值是否为数字
+    if (isNaN(hourInput) || isNaN(minuteInput) || isNaN(secondInput)) {
+        alert('Invalid input: Please enter a number for each field.');
+        return; // 如果输入不合法，不执行下面的代码
     }
+
+    // 检查输入的时间是否在合法范围内
+    if (hourInput < 0 || hourInput > 23 || minuteInput < 0 || minuteInput > 59 || secondInput < 0 || secondInput > 59) {
+        alert('Invalid input: Hour must be between 0-23, Minute and Second must be between 0-59.');
+        document.getElementById('hourInput').value = '';
+        document.getElementById('minuteInput').value = '';
+        document.getElementById('secondInput').value = '';
+        return; // 如果时间不合法，不执行下面的代码
+    }
+    // 将时间设置为12小时制
+    let currentHour = hourInput % 12;
+    // 由于分钟和秒不需要转换，我们直接使用输入的值
+    let currentMinute = minuteInput;
+    let currentSecond = secondInput;
+    // 调用函数来设置时钟的指针
+    setClockHands(currentHour, currentMinute, currentSecond);
 }
 
 function setHand(hand, angle) {
