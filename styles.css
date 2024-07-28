@@ -120,6 +120,13 @@ body {
     color: #E1E1E1;
 }
 
+#clock {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .content-container {
     position: fixed;
     /* 固定位置 */
