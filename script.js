@@ -81,18 +81,53 @@ let currentSecond = new Date().getSeconds();
 
 let isDragging = false;
 let dragging = null;
+let isHigherThan12 = 0;
 
 function updateClock() {
     currentSecond++;
-    if (currentSecond >= 60) {
+    if (currentSecond > 59) {
         currentSecond = 0;
         currentMinute++;
-        if (currentMinute >= 60) {
+        if (currentMinute > 59) {
             currentMinute = 0;
-            currentHour = (currentHour + 1) % 12;
+            currentHour = (currentHour + 1) % 24;
         }
     }
     setClockHandsSmooth();
+}
+function _12And24() {
+    if (currentHour >= 13 && currentHour <= 23) {
+        isHigherThan12 = 1;
+    }
+    else if (currentHour >= 1 && currentHour <= 11) {
+        isHigherThan12 = 0;
+    }
+}
+setInterval(_12And24, 1);
+
+function setClockTime() {
+    const hourInput = parseInt(document.getElementById('hourInput').value);
+    const minuteInput = parseInt(document.getElementById('minuteInput').value);
+    const secondInput = parseInt(document.getElementById('secondInput').value);
+
+    if (isNaN(hourInput) || isNaN(minuteInput) || isNaN(secondInput)
+        || isDemical(hourInput) || isDemical(minuteInput) || isDemical(secondInput) ||
+        hourInput < 0 || minuteInput < 0 || secondInput < 0) {
+        alert("Invalid input!");
+    }
+
+    else if (hourInput < 0 || hourInput > 23 || minuteInput < 0 || minuteInput > 59 || secondInput < 0 || secondInput > 59) {
+        alert('Invalid input: Hour must be between 0-23, Minute and Second must be between 0-59.');
+    }
+
+    else {
+        // 将时间设置当前时间
+        currentHour = hourInput;
+        currentMinute = minuteInput;
+        currentSecond = secondInput;
+        // 调用函数来设置时钟的指针
+        setClockHandsSmooth();
+    }
 }
 
 function setClockHandsSmooth() {
@@ -139,24 +174,46 @@ function getAngleFromEvent(event) {
 
 function updateTimeFromAngle(hand, angle) {
     if (hand.id === 'secondHand') {
-        currentSecond = Math.round(angle / 6);
+        currentSecond = Math.round(angle / 6) % 60;
     } else if (hand.id === 'minuteHand') {
-        currentMinute = Math.round(angle / 6);
+        currentMinute = Math.round(angle / 6) % 60;
     } else if (hand.id === 'hourHand') {
-        currentHour = Math.round(angle / 30) % 12;
+        if (angle >= 345 || angle <= 15) {
+            if (currentHour == 23 || currentHour == 1) {
+                if (currentHour == 23) {
+                    isHigherThan12 = 0;
+                }
+                else {
+                    isHigherThan12 = 1;
+                }
+                currentHour = 0;
+            }
+            else if (currentHour == 13 || currentHour == 11) {
+                if (currentHour == 13) {
+                    isHigherThan12 = 0;
+                }
+                else {
+                    isHigherThan12 = 1;
+                }
+                currentHour = 12;
+            }
+        }
+        else {
+            currentHour = (isHigherThan12 * 12 + Math.round(angle / 30)) % 24;
+        }
     }
     setClockHandsInstant();
 }
 
 document.querySelectorAll('#hourHand, #minuteHand, #secondHand').forEach(hand => {
-    hand.addEventListener('mousedown', function(event) {
+    hand.addEventListener('mousedown', function (event) {
         isDragging = true;
         dragging = hand;
         document.querySelectorAll('#clock line').forEach(line => line.classList.add('no-transition'));
     });
 });
 
-document.addEventListener('mousemove', function(event) {
+document.addEventListener('mousemove', function (event) {
     if (isDragging && dragging) {
         const angle = getAngleFromEvent(event);
         setHandTransform(dragging, angle);
@@ -164,7 +221,7 @@ document.addEventListener('mousemove', function(event) {
     }
 });
 
-document.addEventListener('mouseup', function() {
+document.addEventListener('mouseup', function () {
     if (isDragging) {
         isDragging = false;
         dragging = null;
@@ -253,16 +310,6 @@ function resetTimer() {
 function startStopwatch() {
     stopStopwatch();
     stopwatchInterval = setInterval(() => {
-        stopwatchTime++;
-        document.getElementById('stopwatchDisplay').textContent = formatTime1(stopwatchTime);
-    }, 1000);
-}
-
-
-
-function startStopwatch() {
-    stopStopwatch();
-    stopwatchInterval = setInterval(() => {
         stopwatchTime += 10; // 增加10毫秒
         document.getElementById('stopwatchDisplay').textContent = formatTime1(stopwatchTime);
     }, 10); // 每10毫秒更新一次显示
@@ -317,6 +364,10 @@ var flag = 0;
 var realtime = document.getElementById("realtime");
 let clockTime = 0;
 
+document.getElementById('clockHourInput').value = ` `;
+document.getElementById('clockMinuteInput').value = ` `;
+document.getElementById('clockSecondInput').value = ` `;
+
 setInterval(() => {
     document.getElementById('realtime').innerText = `${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}:${currentSecond.toString().padStart(2, '0')}`;
     isAlarm();
@@ -326,9 +377,12 @@ setInterval(() => {
 function isAlarm() {
 
     let str = document.getElementById('clockonon').textContent;
-    let second = str.slice(-2);
-    let minute = str.slice(-5, -3);
-    let hour = str.slice(-8, -6);
+    let second, minute, hour;
+    if (str.length > 0) {
+        second = str.slice(-2);
+        minute = str.slice(-5, -3);
+        hour = str.slice(-8, -6);
+    }
 
     if (hour == currentHour && minute == currentMinute && second == currentSecond) {
         audioAlert.play();
