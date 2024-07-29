@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+
     const links = document.querySelectorAll(".page-item a");
     const contents = document.querySelectorAll(".content");
 
@@ -77,11 +78,21 @@ var datetime = new Date();
 let currentHour = datetime.getHours();
 let currentMinute = datetime.getMinutes();
 let currentSecond = datetime.getSeconds();
-let timer;
+
+
+let timer = setInterval(updateClock, 1000);
 let isDragging = false;
 let dragging = null;
 
 function updateClock() {
+    // if (isNow == 1) {
+    //     setInterval(() => {
+    //         var datetime = new Date();
+    //         currentHour = datetime.getHours();
+    //         currentMinute = datetime.getMinutes();
+    //         currentSecond = datetime.getSeconds();
+    //     }, 100);
+    // }
     currentSecond++;
     if (currentSecond >= 60) {
         currentSecond = 0;
@@ -93,6 +104,7 @@ function updateClock() {
     }
     setClockHands();
 }
+updateClock();
 
 function setClockHands() {
     const secondAngle = currentSecond * 6;
@@ -107,32 +119,29 @@ function setClockHands() {
 }
 
 function setClockTime() {
-    // 获取输入值并转换为整数
     const hourInput = parseInt(document.getElementById('hourInput').value);
     const minuteInput = parseInt(document.getElementById('minuteInput').value);
     const secondInput = parseInt(document.getElementById('secondInput').value);
 
-    // 检查输入值是否为数字
-    if (isNaN(hourInput) || isNaN(minuteInput) || isNaN(secondInput)) {
-        alert('Invalid input: Please enter a number for each field.');
-        return; // 如果输入不合法，不执行下面的代码
+    if (isNaN(hourInput) || isNaN(minuteInput) || isNaN(secondInput)
+        || isDemical(hourInput) || isDemical(minuteInput) || isDemical(secondInput) ||
+        hourInput < 0 || minuteInput < 0 || secondInput < 0) {
+        alert("Invalid input!");
     }
 
-    // 检查输入的时间是否在合法范围内
-    if (hourInput < 0 || hourInput > 23 || minuteInput < 0 || minuteInput > 59 || secondInput < 0 || secondInput > 59) {
+    else if (hourInput < 0 || hourInput > 23 || minuteInput < 0 || minuteInput > 59 || secondInput < 0 || secondInput > 59) {
         alert('Invalid input: Hour must be between 0-23, Minute and Second must be between 0-59.');
-        document.getElementById('hourInput').value = '';
-        document.getElementById('minuteInput').value = '';
-        document.getElementById('secondInput').value = '';
-        return; // 如果时间不合法，不执行下面的代码
     }
-    // 将时间设置为12小时制
-    let currentHour = hourInput % 12;
-    // 由于分钟和秒不需要转换，我们直接使用输入的值
-    let currentMinute = minuteInput;
-    let currentSecond = secondInput;
-    // 调用函数来设置时钟的指针
-    setClockHands(currentHour, currentMinute, currentSecond);
+
+    else {
+        // 将时间设置当前时间
+        currentHour = hourInput;
+        currentMinute = minuteInput;
+        currentSecond = secondInput;
+        // 调用函数来设置时钟的指针
+        setClockHands();
+    }
+
 }
 
 function setHand(hand, angle) {
@@ -182,8 +191,7 @@ document.addEventListener('mouseup', () => {
     }
 });
 
-updateClock();
-timer = setInterval(updateClock, 1000);
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -340,6 +348,7 @@ function isAlarm() {
     let hour = str.slice(-8, -6);
 
     if (hour == currentHour && minute == currentMinute && second == currentSecond) {
+        audioAlert.play();
         alert("The alarm clock is ringing.");
         clockon = 0;
     }

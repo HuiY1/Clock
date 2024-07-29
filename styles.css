@@ -312,6 +312,8 @@ body {
     /* 去除圆点 */
     padding: 0;
     margin: 0;
+    height: 120px;
+    overflow-y: auto;
 }
 
 #laps li {
