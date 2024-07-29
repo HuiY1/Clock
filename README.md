@@ -35,10 +35,19 @@ https://huiy1.github.io/Clock/
 特别的，在DOMContentLoaded 事件中，额外使用 if (links.length > 0) 判断是否存在分页链接，如果第一个分页链接存在，调用 links[0].click() 模拟点击第一个链接，触发其点击事件监听器，就做到了页面加载完毕时默认显示了模块1（时钟模块）。
 
 
+**时钟**  可分为钟表部分，输入设置时间部分
 
-**时钟**  
+**钟表** 
 
+用SVG画表盘，定位数字，调整细线宽度以区隔时针/分针/秒针，用坐标定位时钟各个刻度线。 使用<circle>元素绘制圆形，其中cx和cy属性确定圆心的位置，r属性定义半径大小。使用<line>元素绘制直线，通过x1、y1、x2和y2属性指定起点和终点的坐标。使用<path>元素绘制更复杂的路径，d属性包含一系列的路径指令和参数来定义形状。使用fill属性定义图形的填充颜色，stroke定义图形的描边颜色，stroke-width定义描边的宽度。
+  同时可以通过鼠标直接拨动时针/分针/秒针以调整时间，调整后的时间会通过数字钟表实时显示。
 
+**输入设置时间**
+
+在HTML中，通过参数设置调控对应时间，并可以通过表盘展示，document.getElementById('secondInput').valuedocument.getElementById('minuteInput').value获取用户输入的秒数和分钟数。
+在JavaScript中，调用setClockTime（）函数，传入读取的分钟和秒数值，更新时钟的显示。
+setClockHands（）函数根据传入的分钟和秒数更新时钟指针的位置，并更新数字显示。
+当用户通过拖动时钟指针来设置时间时，isDragging标志用于控制定时器的暂停和恢复。
 
 **闹钟**  
 
@@ -61,6 +70,9 @@ HTML中的显示器和按钮用于控制秒表和显示时间。
 Clock.main 文件夹中含有 index.html，script.js，styles.css，mixkit-alert-quick-chime-766.wav。用浏览器打开 index.html 即可。
 
 **时钟：**  
+
+表盘部分，可以通过拖动时针，秒针，分针的方式更改表盘对应时间
+输入小时、分钟、秒数，点击 “Set Time” 按钮设置时间，并且在SVG表盘与数字时钟上共同展示。
 
 **闹钟：**  
 
