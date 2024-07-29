@@ -60,6 +60,8 @@ HTML中的显示器和按钮用于控制秒表和显示时间。
 
 Clock.main 文件夹中含有 index.html，script.js，styles.css，mixkit-alert-quick-chime-766.wav。用浏览器打开 index.html 即可。
 
+**时钟：**  
+
 **闹钟：**  
 
 输入小时、分钟、秒数。
