@@ -75,24 +75,14 @@ function rgbToHex(rgb) {
 var datetime = new Date();
 
 ///////////////////////////////////////////////////////////////////////////////////
-let currentHour = datetime.getHours();
-let currentMinute = datetime.getMinutes();
-let currentSecond = datetime.getSeconds();
+let currentHour = new Date().getHours();
+let currentMinute = new Date().getMinutes();
+let currentSecond = new Date().getSeconds();
 
-
-let timer = setInterval(updateClock, 1000);
 let isDragging = false;
 let dragging = null;
 
 function updateClock() {
-    // if (isNow == 1) {
-    //     setInterval(() => {
-    //         var datetime = new Date();
-    //         currentHour = datetime.getHours();
-    //         currentMinute = datetime.getMinutes();
-    //         currentSecond = datetime.getSeconds();
-    //     }, 100);
-    // }
     currentSecond++;
     if (currentSecond >= 60) {
         currentSecond = 0;
@@ -102,57 +92,48 @@ function updateClock() {
             currentHour = (currentHour + 1) % 12;
         }
     }
-    setClockHands();
+    setClockHandsSmooth();
 }
-updateClock();
 
-function setClockHands() {
+function setClockHandsSmooth() {
     const secondAngle = currentSecond * 6;
     const minuteAngle = currentMinute * 6 + currentSecond * 0.1;
     const hourAngle = (currentHour % 12) * 30 + currentMinute * 0.5;
 
-    document.getElementById('secondHand').setAttribute('transform', `rotate(${secondAngle}, 200, 200)`);
-    document.getElementById('minuteHand').setAttribute('transform', `rotate(${minuteAngle}, 200, 200)`);
-    document.getElementById('hourHand').setAttribute('transform', `rotate(${hourAngle}, 200, 200)`);
+    // Apply smooth transition for automatic updates
+    document.querySelectorAll('#clock line').forEach(line => line.classList.remove('no-transition'));
+
+    setHandTransform(document.getElementById('secondHand'), secondAngle);
+    setHandTransform(document.getElementById('minuteHand'), minuteAngle);
+    setHandTransform(document.getElementById('hourHand'), hourAngle);
 
     document.getElementById('digital').innerText = `${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}:${currentSecond.toString().padStart(2, '0')}`;
 }
 
-function setClockTime() {
-    const hourInput = parseInt(document.getElementById('hourInput').value);
-    const minuteInput = parseInt(document.getElementById('minuteInput').value);
-    const secondInput = parseInt(document.getElementById('secondInput').value);
+function setClockHandsInstant() {
+    const secondAngle = currentSecond * 6;
+    const minuteAngle = currentMinute * 6 + currentSecond * 0.1;
+    const hourAngle = (currentHour % 12) * 30 + currentMinute * 0.5;
 
-    if (isNaN(hourInput) || isNaN(minuteInput) || isNaN(secondInput)
-        || isDemical(hourInput) || isDemical(minuteInput) || isDemical(secondInput) ||
-        hourInput < 0 || minuteInput < 0 || secondInput < 0) {
-        alert("Invalid input!");
-    }
+    // Remove transition for instant updates
+    document.querySelectorAll('#clock line').forEach(line => line.classList.add('no-transition'));
 
-    else if (hourInput < 0 || hourInput > 23 || minuteInput < 0 || minuteInput > 59 || secondInput < 0 || secondInput > 59) {
-        alert('Invalid input: Hour must be between 0-23, Minute and Second must be between 0-59.');
-    }
+    setHandTransform(document.getElementById('secondHand'), secondAngle);
+    setHandTransform(document.getElementById('minuteHand'), minuteAngle);
+    setHandTransform(document.getElementById('hourHand'), hourAngle);
 
-    else {
-        // 将时间设置当前时间
-        currentHour = hourInput;
-        currentMinute = minuteInput;
-        currentSecond = secondInput;
-        // 调用函数来设置时钟的指针
-        setClockHands();
-    }
-
+    document.getElementById('digital').innerText = `${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}:${currentSecond.toString().padStart(2, '0')}`;
 }
 
-function setHand(hand, angle) {
-    hand.setAttribute('transform', `rotate(${angle}, 200, 200)`);
+function setHandTransform(hand, angle) {
+    hand.setAttribute('transform', `rotate(${angle} 200 200)`);
 }
 
 function getAngleFromEvent(event) {
-    const rect = event.target.getBoundingClientRect();
+    const rect = document.getElementById('clock').getBoundingClientRect();
     const x = event.clientX - rect.left - 200;
     const y = event.clientY - rect.top - 200;
-    const angle = Math.atan2(y, x) * (180 / Math.PI) + 90;
+    let angle = Math.atan2(y, x) * (180 / Math.PI) + 90;
     return (angle < 0 ? angle + 360 : angle);
 }
 
@@ -164,33 +145,35 @@ function updateTimeFromAngle(hand, angle) {
     } else if (hand.id === 'hourHand') {
         currentHour = Math.round(angle / 30) % 12;
     }
-    setClockHands();
+    setClockHandsInstant();
 }
 
 document.querySelectorAll('#hourHand, #minuteHand, #secondHand').forEach(hand => {
-    hand.addEventListener('mousedown', (e) => {
+    hand.addEventListener('mousedown', function(event) {
         isDragging = true;
-        clearInterval(timer);
-        dragging = e.target;
+        dragging = hand;
+        document.querySelectorAll('#clock line').forEach(line => line.classList.add('no-transition'));
     });
 });
 
-document.addEventListener('mousemove', (e) => {
-    if (dragging) {
-        const angle = getAngleFromEvent(e);
-        setHand(dragging, angle);
+document.addEventListener('mousemove', function(event) {
+    if (isDragging && dragging) {
+        const angle = getAngleFromEvent(event);
+        setHandTransform(dragging, angle);
         updateTimeFromAngle(dragging, angle);
     }
 });
 
-document.addEventListener('mouseup', () => {
+document.addEventListener('mouseup', function() {
     if (isDragging) {
         isDragging = false;
         dragging = null;
-        timer = setInterval(updateClock, 1000);
+        document.querySelectorAll('#clock line').forEach(line => line.classList.remove('no-transition'));
     }
 });
 
+setInterval(updateClock, 1000);
+setClockHandsInstant();  // Initial setup
 
 
 ///////////////////////////////////////////////////////////////////////////////////
