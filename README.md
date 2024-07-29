@@ -9,7 +9,7 @@ Html5，CSS3，JavaScript，Chorme 126.0.6478.127，Visual Studio Code
 
 #### github网站链接
 
-https://huiy1.github.io/Clock/index.html
+https://huiy1.github.io/Clock/
 
 #### 实验分工
 
