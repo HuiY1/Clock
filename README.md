@@ -1,5 +1,4 @@
 # Clock时钟网使用说明
-【清华大学】软件23 张铭宇，软件22 蔡万栩，软件23 杨宇鸿，软件21 马家豪
 
 
 
@@ -117,3 +116,4 @@ SVG + JS 时钟简易教程-CSDN：https://blog.csdn.net/study_way/article/detai
 #### 组员信息
 
 张铭宇 2022012113 1563103248@qq.com
+蔡万栩 2022012087 caiwx22@mails.tsinghua.edu.cn
